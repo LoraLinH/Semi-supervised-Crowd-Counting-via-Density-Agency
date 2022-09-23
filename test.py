@@ -1,8 +1,8 @@
 import torch
 import os
 import numpy as np
-from datasets.crowd_fpn import Crowd
-from models.vgg_m_simi_de import vgg19_trans
+from datasets.crowd_semi import Crowd
+from models.vgg import vgg19_trans
 import argparse
 import math
 from glob import glob
@@ -13,11 +13,9 @@ args = None
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Test ')
-    parser.add_argument('--data-dir', default=r'F:\Dataset\Counting\JHU_Train_Val_Test',
+    parser.add_argument('--data-dir', default='/tmp/Counting/UCF-Train-Val-Test',
                         help='training data directory')
-    # parser.add_argument('--data-dir', default='/home/LinHui/UCF-Train-Val-Test',
-    #                     help='training data directory')
-    parser.add_argument('--save-dir', default='model/laplace/0703-090618',
+    parser.add_argument('--save-dir', default='model',
                         help='model directory')
     parser.add_argument('--device', default='0', help='assign device')
     args = parser.parse_args()
@@ -33,6 +31,8 @@ if __name__ == '__main__':
                                              num_workers=8, pin_memory=False)
 
     model_list = sorted(glob(os.path.join(args.save_dir, '*.pth')))
+    if len(model_list) > 3:
+        model_list = model_list[-3:]
     device = torch.device('cuda')
     model = vgg19_trans()
     model.to(device)
