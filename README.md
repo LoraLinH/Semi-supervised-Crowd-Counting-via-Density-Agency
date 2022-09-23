@@ -3,7 +3,7 @@ Official Implement of ACM Multimedia 2022 paper 'Semi-supervised Crowd Counting 
 
 [arxiv](https://arxiv.org/pdf/2209.02955.pdf)
 
-![image](structure.png)
+![image](structure.jpg)
 
 ## Dataset Preparation
 1. Dowload Dataset.
